@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+#root{
+  font-family: 'inter',sans-serif;
+  font-optical-sizing: auto; 
+  font-style:normal;
+  
+}
+
+.hideIndi::-webkit-scrollbar {
+    display: none;
+}

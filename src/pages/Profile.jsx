@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from 'react'
+import MyOrderPage from '../components/products/MyOrderPage'
+import { useNavigate } from 'react-router-dom'
+
+function Profile() {
+    const navigate = useNavigate()
+    const [user, setUser] = useState({})
+    const [orders, setOrders] = useState([])
+    const checkLogin = async() =>{
+        if(!localStorage.getItem('userToken')){
+            navigate('/login')
+        }
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        setUser(userInfo)
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders?user=${userInfo._id}`,{
+                method:'get',
+                headers:{
+                    'Content-Type':'application/json',
+                    'authorization':`Bearer ${localStorage.getItem('userToken')}`
+                },
+            })
+            const data = await res.json();
+            console.log(data)
+            setOrders(data)
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(()=>{
+        checkLogin()
+    },[])
+
+    const handleLogOut = () =>{
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("userToken");
+        window.location.href = '/login'
+    }
+  return (
+    <div className='min-h-screen flex flex-col '>
+        <div className="flex-grow container mx-auto p-6 md:p-6 ">
+            <div className="flex flex-col lg:flex-row md:space-x-6 space-y-6 md:space-y-6">
+                <div className="w-full lg:w-1/4 bg-white p-3 md:p-8 rounded-lg shadow-lg space-y-5">
+                    <h1 className='text-xl font-semibold'>{user?.name}</h1>
+                    <p>{user?.email}</p>
+                    <button onClick={handleLogOut} className='bg-red-500 hover:bg-red-400 cursor-pointer text-white py-2 w-full rounded-lg '>
+                        Logout
+                    </button>
+
+                </div>
+
+                {/* Orders page */}
+               <MyOrderPage orders={orders}/>
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default Profile
