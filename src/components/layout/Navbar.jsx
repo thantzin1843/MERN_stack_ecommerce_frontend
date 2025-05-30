@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi'
 import { HiBars3BottomRight } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
@@ -14,6 +14,7 @@ function Navbar() {
       const toggleDrawerOpen = () =>{
         setOpen(!open);
       }
+
   return (
     <>
     <nav className='container mx-auto flex justify-between items-center py-4 px-6 '>
@@ -41,9 +42,15 @@ function Navbar() {
                 Bottom Wear
             </Link>
         </div>
+        
         <div className="flex items-center space-x-4">
-            <Link to="/profile" className='hover:text-black '>
+            {/* <Link to="/profile" className='hover:text-black '>
                 <HiOutlineUser className='h-6 w-6 text-gray-700'/>
+            </Link> */}
+            
+            
+            <Link to={'/profile/change_password'} className='p-2 rounded-full hover:bg-gray-200'>
+                <HiOutlineUser className='h-6 w-6 text-gray-700 '/>
             </Link>
 
             <button onClick={toggleDrawerOpen} className='relative hover:text-black'>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 function MyOrders() {
+  
   return (
     <div className='w-full lg:max-w-6xl my-6 p-6 mx-auto'>
       <h2 className='font-bold'>Products</h2>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-function OrderDetail() {
+function AdminOrderDetail() {
       const [orderInfo, setOrderInfo] = useState({})
        const {id} = useParams();
        const navigate = useNavigate()
@@ -28,19 +28,23 @@ function OrderDetail() {
            getOrderInformation()
        },[])
 
-       
-       const getColor = (status) =>{
-            console.log(status)
-            if(status == "Pending"){
-                return "bg-yellow-500 text-white"
-            }else if(status == "Processing"){
-                return "bg-blue-500 text-white"
-            }else if(status == "Delivered"){
-                return "bg-green-500 text-white"
-            }else{
-                return "bg-red-500 text-white"
-            }
-       }
+        const handleStatusChange = async(status,orderId) =>{
+         try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/change-status`,{
+                method:'put',
+                headers:{
+                    'Content-Type':'application/json',
+                    'authorization':`Bearer ${localStorage.getItem('userToken')}`
+                },
+                body:JSON.stringify({status:status, orderId:orderId})
+            })
+            const data = await res.json();
+            console.log(data)
+        } catch (error) {
+            
+        }
+    }
+    
   return (
     <div className='my-6 w-full px-6 lg:px-0 lg:max-w-6xl mx-auto'>
         <h1>Order Details</h1>
@@ -52,17 +56,39 @@ function OrderDetail() {
                     <p>{new Date(orderInfo?.createdAt).toLocaleDateString()}</p>
                 </div>
                 <div className='space-y-1'>
-                    <p className={`py-1 text-center px-3 ${getColor(orderInfo?.status)} text-sm rounded-full`}>{orderInfo?.status}</p>
+                    {/* <p className={`py-1 text-center px-3 ${getColor(orderInfo?.status)} text-sm rounded-full`}>{orderInfo?.status}</p> */}
+                                            <select name="" id="" onChange={(e)=>handleStatusChange(e.target.value,orderInfo?._id)}>
+                                                <option value="Pending" selected={orderInfo?.status == "Pending"}>Pending</option>
+                                                <option value="Processing" selected={orderInfo?.status == "Processing"}>Processing</option>
+                                                <option value="Delivered" selected={orderInfo?.status == "Delivered"}>Delivered</option>
+                                                <option value="Cancelled" selected={orderInfo?.status == "Cancelled"}>Cancelled</option>
+                                            </select>
                 </div>
             </div>
 
-              <div className="grid grid-cols-2 my-10">
+            <div>
+                {
+                    orderInfo?.images?.length > 0 ? (
+                        <div className='my-5'>
+                            <div>Payment Screenshot:</div>
+                            <img src={orderInfo?.images?.[0]} className='w-1/2' alt="" />
+                        </div>
+                    ):(
+                        <div className='my-5'>
+                            <div>Payment Screenshot:</div>
+                            <div className='text-xl '>N/A</div>
+                        </div>
+                    )
+                }
+            </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 my-10">
                 <div>
                     <h2 className='font-medium'>Payment Info</h2>
                     <p className='text-sm mt-2 text-gray-500 '>Payment Method: <span className='uppercase'>{orderInfo?.paymentMethod}</span> pay</p>
                 </div>
                 <div>
-                    <h2 className='font-medium'>Shipping Info</h2>
+                    <h2 className='font-medium mt-5 md:mt-0'>Shipping Info</h2>
                     <p className='text-sm mt-2 text-gray-500 '>{orderInfo?.shippingAddress?.address}</p>
                     <p className='text-sm text-gray-500 '>{orderInfo?.shippingAddress?.city}, {orderInfo?.shippingAddress?.country}</p>
                 </div>
@@ -100,7 +126,7 @@ function OrderDetail() {
             </div>
 
             {/* back to orders link */}
-            <Link to={'/profile/my-orders'} className=' text-blue-500 underline '>Back to Orders</Link>
+            <Link to={'/admin/order/list'} className=' text-blue-500 underline '>Back to Orders</Link>
 
 
         </div>
@@ -108,4 +134,4 @@ function OrderDetail() {
   )
 }
 
-export default OrderDetail
+export default AdminOrderDetail

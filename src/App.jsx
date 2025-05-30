@@ -18,6 +18,12 @@ import ProductListPage from "./admin/pages/ProductListPage"
 import CreateProduct from "./admin/pages/product/CreateProduct"
 import DetailProductPage from "./pages/DetailProductPage"
 import EditProduct from "./admin/pages/product/EditProduct"
+import OrderListPage from "./admin/pages/order/OrderListPage"
+import AdminOrderDetail from "./admin/pages/order/OrderDetail"
+import AdminProfile from "./admin/pages/profile/AdminProfile"
+import UserProfile from "./pages/UserProfile"
+import MyOrderPage from "./components/products/MyOrderPage"
+import UserListPage from "./admin/pages/UserListPage"
 
 function App() {
   return (
@@ -30,8 +36,10 @@ function App() {
         <Route index element={<Home/>}/>
         <Route path="login" element = {<Login/>} />
         <Route path="register" element = {<Register/>} />
-        <Route path="profile" element = {<Profile/>} />
-        <Route path="my-orders" element = {<MyOrders/>} />
+        <Route path="profile" element = {<Profile/>} >
+          <Route path="change_password" element = {<UserProfile/>} />
+          <Route path="my-orders" element = {<MyOrderPage/>} />
+        </Route>
         <Route path="products/list" element = {<Collection/>} />
         <Route path="products/:id" element = {<DetailProductPage/>} />
         <Route path="checkout" element = {<Checkout/>} />
@@ -45,6 +53,10 @@ function App() {
         <Route path="product/list" element={<ProductListPage/>}/>
         <Route path="product/createForm" element={<CreateProduct/>}/>
         <Route path="products/editPage/:id" element={<EditProduct/>}/>
+        <Route path="user/list" element={<UserListPage/>}/>
+        <Route path="order/list" element={<OrderListPage/>}/>
+        <Route path="order/:id" element = {<AdminOrderDetail/>} />
+        <Route path="profile" element={<AdminProfile/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

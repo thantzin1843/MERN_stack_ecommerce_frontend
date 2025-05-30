@@ -1,28 +1,38 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { loginUser } from '../redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleLogin =async(e) =>{
         e.preventDefault();
-        // dispatch(loginUser({email,password}))
-        const response = await fetch('http://localhost:9000/api/user/login',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({email,password})
-        })
-        const data = await response.json();
-        console.log(data)
-        localStorage.setItem("userInfo",JSON.stringify(data?.user))
-        localStorage.setItem("userToken",data?.token)
+        if(!email || !password){
+            toast.error("All fields must be filled!")
+            return
+        }
+        try {
+                const response = await fetch('http://localhost:9000/api/user/login',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({email,password})
+                })
+                const data = await response.json();
+                if(data.status==400){
+                    toast.error("Wrong Email or Password!")
+                    return
+                }
+                localStorage.setItem("userInfo",JSON.stringify(data?.user))
+                localStorage.setItem("userToken",data?.token)
+                navigate('/')
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
   return (
