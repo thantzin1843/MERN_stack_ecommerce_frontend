@@ -44,12 +44,12 @@ function MyOrderPage() {
                     <div className="overflow-scroll md:overflow-hidden  w-full rounded-lg shadow-xl mt-3">
                         <table className='w-full'>
                         <tr className='bg-gray-400 ' >
-                            <th className='text-start text-sm p-3 '>IMAGE</th>
-                            <th className='text-start text-sm p-3'>ORDER ID</th>
-                            <th className='text-start text-sm p-3'>CREATED AT</th>
-                            <th className='text-start text-sm p-3'>SHIPPING ADDRESS</th>
-                            <th className='text-start text-sm p-3'>TOTAL PRICE</th>
-                            <th className='text-start text-sm p-3'>STATUS</th>
+                            <th className='text-start sm:text-sm p-3 '>IMAGE</th>
+                            <th className='text-start sm:text-sm p-3'>ORDER ID</th>
+                            <th className='text-start sm:text-sm p-3'>CREATED AT</th>
+                            <th className='text-start sm:text-sm p-3'>SHIPPING ADDRESS</th>
+                            <th className='text-start sm:text-sm p-3'>TOTAL PRICE</th>
+                            <th className='text-start sm:text-sm p-3'>STATUS</th>
                         </tr>
                         {
                             orders.length > 0 ? (

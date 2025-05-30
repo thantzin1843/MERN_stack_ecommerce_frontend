@@ -1,5 +1,5 @@
 import React from 'react'
-import womenImg from '../../assets/womens-collection.webp'
+import womenImg from '../../assets/women-collection.jpg'
 import menImg from '../../assets/mens-collection.webp'
 import { Link } from 'react-router-dom'
 

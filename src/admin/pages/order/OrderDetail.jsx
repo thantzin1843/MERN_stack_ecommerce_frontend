@@ -50,7 +50,7 @@ function AdminOrderDetail() {
         <h1>Order Details</h1>
 
         <div className="rounded-lg p-5 mt-5 shadow border border-gray-200">
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap">
                 <div>
                     <h1 className="font-medium">Order ID: {orderInfo?._id}</h1>
                     <p>{new Date(orderInfo?.createdAt).toLocaleDateString()}</p>

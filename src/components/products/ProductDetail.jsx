@@ -201,7 +201,7 @@ function ProductDetail({bestSeller,similarProducts}) {
                        $ {others.price ? others.price :"Select size and color first!"}
                     </p>
                     <p className='text-lg text-gray-600 mb-1 line-through '>
-                        {others.discountPrice !==0 && `$ ${others.discountPrice}`}
+                        {others?.discountPrice && `$ ${others.discountPrice}`}
                     </p>
                     </div>
                   <div className="mb-4">

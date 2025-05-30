@@ -4,7 +4,27 @@ import { FiDelete } from 'react-icons/fi'
 import { MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-function ProductListTable({products}) {
+function ProductListTable({products,fetchProducts}) {
+    const handleDeleteProduct = async(id) =>{
+        const confirm = window.confirm("Are you sure you want to delete this product?")
+        if(confirm){
+            try {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,{
+                    method:'delete',
+                    headers:{
+                        'Content-Type':'application/json',
+                        'authorization':`Bearer ${localStorage.getItem('userToken')}`
+                    }
+                })
+                const data = await res.json();
+                fetchProducts()
+                console.log(data)
+            } catch (error) {
+                console.log(error.message)
+            }
+
+        }
+    }
   return (
     <div className=' rounded-lg overflow-x-scroll lg:overflow-hidden  border border-gray-300'>
         <table className='w-full text-gray-600'>
@@ -34,7 +54,7 @@ function ProductListTable({products}) {
                     </td>
                     <td className='text-start p-2 '>
                         <Link to={`/admin/products/editPage/${product?._id}`}><BiEdit className='w-6 h-6 inline me-3'/></Link>
-                        <MdDelete className='w-6 h-6 inline '/>
+                        <MdDelete className='w-6 h-6 inline ' onClick={()=>handleDeleteProduct(product?._id)}/>
                     </td>
                 </tr>
                 ))

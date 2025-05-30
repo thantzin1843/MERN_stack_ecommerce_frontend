@@ -1,4 +1,5 @@
 import React from 'react'
+import { BiPhone } from 'react-icons/bi'
 import { IoLogoInstagram } from 'react-icons/io'
 import { RiTwitterXLine } from 'react-icons/ri'
 import { TbBrandMeta } from 'react-icons/tb'
@@ -22,7 +23,8 @@ function TopBar() {
                 <span>We ship worldwide - Fast and reliable shipping!</span>
             </div>
             <div className="text-sm hidden md:block">
-                <a href="tel:+123456799" className='hover:text-gray-300'>+1 (123) 567-898</a>
+                <a href="tel:+123456799" className='hover:text-gray-300'>
+                   <BiPhone className='inline w-6 h-6'/> 09-44568826</a>
             </div>
         </div>
     </div>

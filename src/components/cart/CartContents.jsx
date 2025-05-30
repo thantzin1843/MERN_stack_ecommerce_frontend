@@ -64,12 +64,12 @@ function CartContents() {
         {
             cartProducts?.map((product,index)=>(
                 <div key={index} className='flex items-start justify-between py-4 border-b '>
-                    <div className="flex items-center">
-                        <img src={product.image} alt={product.name} className='w-20 h-20 object-cover mr-4 rounded'/>
+                    <div className="flex ">
+                        <img src={product.image} alt={product.name} className='w-15 h-15 sm:w-20 sm:h-20 object-cover mr-4 rounded'/>
                     
                         <div>
                             <h3>{product.name}</h3>
-                            <p className='text-sm text-gray-500'>
+                            <p className='text-xs sm:text-sm text-gray-500'>
                                 {
                                     product?.size && <span>size: {product.size} </span>
                                 }
@@ -87,9 +87,9 @@ function CartContents() {
                     </div>
 
                     <div>
-                        <p className=''>Unit Price - ${product.price}</p>
-                        <p className=''>Subtotal - $ {product.price * (1-product.discountPrice/100) * product.quantity}</p>
-                        <p className='text-red-500'>{product.discountPrice}% off</p>
+                        <p className='text-xs sm:text-[16px]'>Unit Price - ${product.price}</p>
+                        <p className='text-xs sm:text-[16px]'>Subtotal - $ {product.price * (1-product.discountPrice/100) * product.quantity}</p>
+                        <p className='text-red-500 text-xs sm:text-[16px]'>{product.discountPrice}% off</p>
                         <button onClick={()=>deleteCartItem(product.productId,product?.size,product?.color)}>
                             <RiDeleteBin3Line className='h-6 w-6 mt-2 text-red-600'/>
                         </button>

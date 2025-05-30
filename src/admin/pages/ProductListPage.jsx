@@ -22,12 +22,12 @@ function ProductListPage() {
   },[searchText])
   return (
     <div>
-        <div className="flex justify-between py-5">
+        <div className="flex justify-between flex-wrap py-5">
             <div>
               <Link to={`/admin/product/createForm`} className='p-2 bg-orange-400 rounded-md text-white flex items-center gap-2'><PiPlusCircle className='inline w-6 h-6'/> Create Product</Link>
             </div>
 
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 mt-3 sm:mt-0'>
                 <input onChange={(e)=>setSearchText(e.target.value)} type="text" name="" id="" className="px-2 py-1 border-1 rounded-md border-gray-300" placeholder='Search'/>
                 <button className='bg-orange-400 text-white rounded-md py-2 px-3' onClick={fetchProducts}>
                     <FaMagnifyingGlass className=''/>
@@ -35,7 +35,7 @@ function ProductListPage() {
             </div>
         </div>
 
-        <ProductListTable products={products}/>
+        <ProductListTable products={products} fetchProducts={fetchProducts}/>
        
     </div>
   )

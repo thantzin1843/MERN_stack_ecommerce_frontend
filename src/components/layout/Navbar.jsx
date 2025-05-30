@@ -34,13 +34,10 @@ function Navbar() {
                 Women
             </Link>
 
-            <Link to={'/'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
-                Top Wear
+            <Link to={'/products/list'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
+                Explore!
             </Link>
 
-            <Link to={'/'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
-                Bottom Wear
-            </Link>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -91,13 +88,18 @@ function Navbar() {
                         Women
                     </Link>
 
-                    <Link to={'/'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
+                    <Link to={'/products/list'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
                         Top Wear
                     </Link>
 
-                    <Link to={'/'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
+                    <Link to={'/products/list'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
                         Bottom Wear
                     </Link>
+
+                    <Link to={'/products/list'} className='text-gray-700 hover:text-black text-sm font-medium uppercase'>
+                        Explore!
+                    </Link>
+
             </nav>
         </div>
     </div>

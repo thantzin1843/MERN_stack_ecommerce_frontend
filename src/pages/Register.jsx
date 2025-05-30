@@ -1,30 +1,51 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { registerUser } from '../redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 function Register() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirm_password, setConfrimPassword] = useState('')
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleRegister = async(e) =>{
         e.preventDefault();
-        dispatch(registerUser({name,email,password}));
+        const errors = {}
+        if(!name || !email || !password){
+            toast.error("All fields must be filled!")
+            return
+        }
 
-        
-        // console.log(name, email, password , confirm_password)
-        // const response = await fetch("http://localhost:9000/api/user/register",{
-        //     method: 'POST',
-        //     headers:{
-        //         'Content-Type' : 'application/json'
-        //     },
-        //     body:JSON.stringify({name, email, password})
-        // })
-        // const data = await response.json();
-        // console.log(data)
+        if(password && password.length < 6){
+            toast.error("Password length must be greater than or equal to 6.")
+            return
+        }
+
+        if(password !== confirm_password){
+            toast.error("Confirm password must match password.")
+            return
+        }
+
+        try {
+            const response = await fetch("http://localhost:9000/api/user/register",{
+                method: 'POST',
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify({name, email, password})
+            })
+            const data = await response.json();
+            console.log(data)
+            if(data.status==400){
+                toast.error("Email Already registered!")
+                return
+            }
+            localStorage.setItem("userInfo",JSON.stringify(data?.user))
+            localStorage.setItem("userToken",data?.token)
+            navigate('/')
+        } catch (error) {
+            
+        }
     }
 
   return (
