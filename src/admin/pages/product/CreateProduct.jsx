@@ -123,7 +123,7 @@ function CreateProduct() {
             variants,price, discountPrice,countInStock,hasVariants,
             isPublished:true,images
         }
-        
+        console.log(payload)
         try {
             const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/create`,{
                 method:'POST',

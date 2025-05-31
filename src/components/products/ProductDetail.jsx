@@ -203,8 +203,8 @@ function ProductDetail({bestSeller,similarProducts}) {
                     {
                         others?.discountPrice && (
                             <p className='text-md h-6 ps-6 pe-3 text-white mb-1 bg-orange-500' style={{clipPath: "polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 61%)"}}>
-                                {others?.discountPrice && `${others.discountPrice} %Off`}
-                            </p>
+                            {others?.discountPrice && `${others.discountPrice} %Off`}
+                        </p>
                         )
                     }
                     </div>
@@ -264,12 +264,18 @@ function ProductDetail({bestSeller,similarProducts}) {
 </div>
                         ):(
                             <>
-                    <p className='text-lg text-gray-600 mb-2 '>
+                    <div className="flex gap-5">
+                        <p className='text-lg text-gray-600 mb-2 '>
                        $ {bestSeller?.price}
                     </p>
-                    <p className='text-lg text-gray-600 mb-1 line-through '>
-                        {bestSeller.discountPrice!==0 && `$ ${bestSeller.discountPrice}`}
-                    </p>
+                     {
+                        bestSeller?.discountPrice && (
+                            <p className='text-md h-6 ps-6 pe-3 text-white mb-1 bg-orange-500' style={{clipPath: "polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 61%)"}}>
+                            {bestSeller?.discountPrice && `${bestSeller.discountPrice} %Off`}
+                            </p>
+                        )
+                        }
+                    </div>
                     <div className="mb-6">
                         <p className="text-gray-700">
                             Quantity:
