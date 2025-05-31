@@ -66,7 +66,7 @@ function CreateProduct() {
     const [variants, setVariants] = useState([])
     const handleVariantChange = (e) =>{
         const {type, value, name} = e.target;
-        console.log(type, value, name)
+        // console.log(type, value, name)
         if(name=="discountPrice" && Number(value) >= variant.price){
             toast.error("Discount price(%) must be lower than product price.");
             return
@@ -89,8 +89,9 @@ function CreateProduct() {
         })
     }
     const removeVariant = (size,color) =>{
+        console.log(size,color,variants)
         setVariants(variants.filter((v)=>(
-            v.size !== size && v.color !== color
+            !(v.size === size && v.color === color)
         )))
     }
     // tags section
