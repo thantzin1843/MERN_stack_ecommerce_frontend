@@ -29,6 +29,7 @@ function Login() {
                 }
                 localStorage.setItem("userInfo",JSON.stringify(data?.user))
                 localStorage.setItem("userToken",data?.token)
+                toast.success(`Welcome ${data?.user?.name}`)
                 navigate('/')
         } catch (error) {
             console.log(error.message)

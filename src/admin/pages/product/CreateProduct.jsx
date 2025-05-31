@@ -67,7 +67,7 @@ function CreateProduct() {
         const {type, value, name} = e.target;
         console.log(type, value, name)
         if(name=="discountPrice" && Number(value) >= variant.price){
-            toast.error("Discount price must be lower than product price.");
+            toast.error("Discount price(%) must be lower than product price.");
             return
         }
         setVariant(prev => ({
@@ -148,7 +148,7 @@ function CreateProduct() {
                                 setDiscountPrice(dp)
                                 return
                             }
-                            toast.error("Discount price must be lower than product price.")
+                            toast.error("Discount price(%) must be lower than product price.")
                             return
                         
     }
@@ -250,7 +250,7 @@ function CreateProduct() {
                         </div>
 
                         <div className=''>
-                            <label htmlFor="" className='text-gray-500 text-sm'>Discount Price</label>
+                            <label htmlFor="" className='text-gray-500 text-sm'>Discount Price(%)</label>
                             <input min="0" value={variant?.discountPrice} onChange={handleVariantChange} type="number" name="discountPrice" placeholder='Discount price' className="border border-gray-400 p-2 rounded-md w-full" />
                         </div>
                     </div>
@@ -272,7 +272,7 @@ function CreateProduct() {
                     </div>
 
                     <div className=''>
-                        <label htmlFor="" className='text-gray-500 text-sm'>Discount Price</label>
+                        <label htmlFor="" className='text-gray-500 text-sm'>Discount Price(%)</label>
                         <input value={discountPrice} onChange={(e)=>changeDiscountPrice(e.target.value)} type="number" name="" placeholder='Discount price' className="border border-gray-400 p-2 rounded-md w-full" required/>
                     </div>
                     </div>
@@ -305,7 +305,7 @@ function CreateProduct() {
 
             <div className='my-5'>
                 <label htmlFor="" className='text-gray-500 text-sm'>Description</label>
-                <textarea name="" value={description} onChange={(e)=>setDescription(e.target.value)}  className="border border-gray-400 p-2 rounded-md w-full">
+                <textarea name="" value={description} onChange={(e)=>setDescription(e.target.value)}  className="border border-gray-400 p-2 rounded-md w-full" required>
                     
                 </textarea>
             </div>
@@ -357,7 +357,7 @@ function CreateProduct() {
                 </div>
                 <div className="flex gap-2">
 
-                <input type="text" value={tag}  placeholder='tag' onChange={(e)=>setTag(e.target.value)} className="border border-gray-400 p-2 rounded-md w-full"/>
+                <input type="text" value={tag}  placeholder='tag' onChange={(e)=>setTag(e.target.value)} className="border border-gray-400 p-2 rounded-md w-full" />
                 <button type="button" onClick={addTags} className='px-3 bg-blue-600 rounded-md '>+</button>
                 </div>
             </div>

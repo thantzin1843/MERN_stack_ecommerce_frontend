@@ -200,9 +200,13 @@ function ProductDetail({bestSeller,similarProducts}) {
                         <p className='text-lg font-medium mb-2 '>
                        $ {others.price ? others.price :"Select size and color first!"}
                     </p>
-                    <p className='text-lg text-gray-600 mb-1 line-through '>
-                        {others?.discountPrice && `$ ${others.discountPrice}`}
-                    </p>
+                    {
+                        others?.discountPrice && (
+                            <p className='text-md h-6 ps-6 pe-3 text-white mb-1 bg-orange-500' style={{clipPath: "polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 61%)"}}>
+                                {others?.discountPrice && `${others.discountPrice} %Off`}
+                            </p>
+                        )
+                    }
                     </div>
                   <div className="mb-4">
                             <p className='text-gray-700'>
