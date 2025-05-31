@@ -52,9 +52,9 @@ function CreateProduct() {
         setImages((prev)=>[...prev,image])
     }
 
-    const [price,setPrice] = useState();
-    const [discountPrice,setDiscountPrice] = useState();
-    const [countInStock,setCountInStock] = useState();
+    const [price,setPrice] = useState(0);
+    const [discountPrice,setDiscountPrice] = useState(0);
+    const [countInStock,setCountInStock] = useState(0);
     // variants section
     const [variant, setVariant] = useState({
         size:"",
