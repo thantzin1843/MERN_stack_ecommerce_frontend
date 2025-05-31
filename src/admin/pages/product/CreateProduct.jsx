@@ -5,11 +5,12 @@ import { FaCircleXmark } from 'react-icons/fa6'
 import CollectionForm from '../../components/CollectionForm'
 import { toast } from 'sonner'
 import ImageKitUpload from '../../components/ImageUpload'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function CreateProduct() {
     const [categories, setCategories] = useState([]);
     const [collections, setCollections] = useState([]);
+    const navigate = useNavigate()
     const fetchCategoriesAndCollections = async() =>{
         try {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`,{
@@ -134,6 +135,8 @@ function CreateProduct() {
             })
             const CreatedProduct = await res.json()
             console.log(CreatedProduct);
+            toast.success("Product created successfully!")
+            navigate('/admin/product/list');
         } catch (error) {
             
         }
